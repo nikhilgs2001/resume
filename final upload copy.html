@@ -1,0 +1,263 @@
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<title>Upload Resume</title>
+<style>
+  body{
+    background-color: #fff5e6;
+  }
+	img{
+		height: auto;
+		width: 100%;
+		
+	}
+  .head1{
+      background-color: #0e0e3f;
+      padding-top: 25px;
+      padding-bottom: 25px;
+      color: white;
+      font-size: 40px;
+      font-family: Copperplate;
+      text-align: center;
+    }
+   .foo{
+      font-family: Georgia;
+      color: #808080;
+      font-size: 10px;
+      margin-top: 100px;
+      margin-left: 20px;
+    }
+.text{
+  border-color: #d57676;
+  color: #ff4d67;
+  outline: none;
+  background-color: transparent;
+  font-size: 15px;
+
+}
+
+.text1{
+  margin-left: 10px;
+   border-radius: 10px;
+   padding-left: 20px;
+   border-color: white;
+   outline: none;
+   background-color: transparent;
+   font-size: 20px;
+   color: #0e0e3f;
+}
+.text2{
+  margin-left: 38px;
+   border-radius: 10px;
+   padding-left: 20px;
+   border-color: white;
+   outline: none;
+   font-size: 20px;
+   background-color: transparent;
+   color: #0e0e3f;
+}
+.text3{
+  margin-left: 0px;
+   border-radius: 10px;
+   padding-left: 20px;
+   border-color: white;
+   outline: none;
+   font-size: 20px;
+   color: #0e0e3f;
+   background-color: transparent;
+}
+.text4{
+  margin-left: 16px;
+   border-radius: 10px;
+   padding-left: 20px;
+   border-color: white;
+   outline: none;
+   font-size: 20px;
+   color: #0e0e3f;
+   background-color: transparent;
+}
+#select,#upload{
+color: white;
+background-color: #0e0e3f;
+font-size: 20px;
+border: none;
+border-radius: 15px;
+padding-top: 10px;
+padding-bottom: 10px;
+padding-left: 10px;
+padding-right: 10px;
+margin-top: 20px;
+outline: none;
+}
+
+.po{
+  text-align: center;
+  
+}
+#UpProgress{
+  color: #ff1a3c;
+  font-family: Copperplate;
+  margin-left: 10px;
+  margin-top: 10px;
+}
+.ib1{
+  text-decoration: none;
+  color: white;
+background-color: #cc001f;
+font-size: 20px;
+border: none;
+border-radius: 15px;
+padding-top: 10px;
+padding-bottom: 10px;
+padding-left: 10px;
+padding-right: 10px;
+margin-top: 20px;
+outline: none;
+}
+.ib{
+  margin-top: 30px;
+  text-align:center;
+}
+
+</style>
+
+</head>
+<body>
+  <div class="head1">
+    Upload your Resume and profile
+  </div><br><br>
+
+
+<span style="font-size: 20px;color: #0d0d0d;font-weight: bold;margin-left: 10px;">
+User Name:</span><input type="text" id="name1" class="text1"><br><br>
+
+<span style="font-size: 20px;color: #0d0d0d;font-weight: bold;margin-left: 10px;">
+Roll.No:</span><input type="text" id="name3" class="text2"><br><br>
+
+<span style="font-size: 20px;color: #0d0d0d;font-weight: bold;margin-left: 10px;">Department:</span><input type="text" id="name" class="text3"><br><br>
+
+<span style="font-size: 20px;color: #0d0d0d;font-weight: bold;margin-left: 10px;">
+Password :</span><input type="password" id="name2" class="text4"><br><br>
+
+<label id="UpProgress"></label><br>
+
+<div class="po">
+
+<input type="button" id="select" value="Select Resume">
+<button id="upload">Upload Resume <i class="fa fa-upload"></i></button>
+</div>
+
+
+<script src="https://www.gstatic.com/firebasejs/8.3.3/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.3.3/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.3.3/firebase-database.js"></script> 
+<script src="https://www.gstatic.com/firebasejs/8.3.3/firebase-storage.js"></script> 
+
+<script id="MainScript">
+  var ImgName=0;
+  var ImgUrl;
+  var files = [];
+  var reader;
+var a;
+	var firebaseConfig = {
+   apiKey: "AIzaSyC4y03stQAJK_UuOPHliroLe6AGVNYaPOE",
+    authDomain: "resume-uploader-dae65.firebaseapp.com",
+    databaseURL: "https://resume-uploader-dae65-default-rtdb.firebaseio.com",
+    projectId: "resume-uploader-dae65",
+    storageBucket: "resume-uploader-dae65.appspot.com",
+    messagingSenderId: "176354575684",
+    appId: "1:176354575684:web:b38d23fe6c6b8788a90311",
+    measurementId: "G-BNVBRNRSZW"
+  };
+  
+  firebase.initializeApp(firebaseConfig);
+
+  document.getElementById("select").onclick = function(e){
+  	var input = document.createElement('input');
+  	input.type='file';
+    input.accept="application/pdf";  	
+
+  	input.onchange = e => {
+  		files = e.target.files;
+  		reader = new FileReader();
+  		reader.onload = function(){
+  			document.getElementById("myimg").src = reader.result;
+  		}
+  		reader.readAsDataURL(files[0]);
+document.getElementById('UpProgress').innerHTML = "Your Resume is Selected";
+  	}
+  	input.click();
+
+  }
+
+//------Upload progress
+document.getElementById("upload").onclick=function(){
+	//ImgName = document.getElementById("namebox").value;
+  
+ alert("Please wait your Resume is Uploading");
+
+timeoutI = setInterval(hiiii,1000);
+function hiiii(){
+firebase.database().ref('Pictures/'+"nikhil"+'/com').on('value',(snap)=>{
+    ImgName=snap.val();
+  });
+
+
+ if(ImgName>0){
+clearInterval(timeoutI);
+lp();
+
+ }   
+ 
+}
+
+
+	name=document.getElementById("name").value;
+  name1=document.getElementById("name1").value;
+  name2=document.getElementById("name2").value;
+  name3=document.getElementById("name3").value;
+	var uploadTask = firebase.storage().ref('Images/'+name3).put(files[0]);
+    uploadTask.on('state_changed',function(snapshot){
+    var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+    document.getElementById('UpProgress').innerHTML = 'Upload'+progress+'%';
+
+
+    },
+
+    function(error){
+    	alert("error");
+    },
+    function(){
+    	uploadTask.snapshot.ref.getDownloadURL().then(function(url){
+            ImgUrl = url;
+    	
+        firebase.database().ref('Pictures/'+ImgName).set({
+            Name: name1,
+            Dept:name,
+            Link: ImgUrl,
+            Password:name2,
+            Rollno:name3
+        });
+ alert("Your Resume is Uploaded with Id as"+ImgName);
+    }
+         );
+    	});
+    
+ firebase.database().ref('Pictures/'+'nikhil').set({
+        com:firebase.database.ServerValue.increment(1)
+    });
+}
+
+
+
+</script>
+
+
+<div class="foo">
+<span style="font-size: 20px;">Note:</span><br><br>
+1.Please make note of the ID for your Reference<br>
+2.Upload Your profile and Resume using upload Resume button.
+</div>
+</body>	
+</html>

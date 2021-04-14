@@ -1,0 +1,174 @@
+<html>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <title>Resume</title>
+	<style>
+    body{
+      background-color: #fff5e6;
+    }
+     img{
+     	height: auto;
+     	width: 100%;
+     	border:transparent;
+        text-align: left;
+      
+     }
+     .hi{
+     	text-align: center;
+     	background-color: black;
+     	color: white;
+     }
+     .head1{
+            background-color: #0e0e3f;
+            padding-top: 25px;
+            padding-bottom: 25px;
+            color: white;
+            font-size: 40px;
+            font-family: Copperplate;
+            text-align: center;
+        }
+        .pp{
+            vertical-align: middle;
+  width: 50px;
+  height: 50px;
+  border: transparent;
+  border-radius: 50%;
+  background-color: transparent;
+        }
+        #demo{
+
+        }
+        #ko{
+          color:black;
+        }
+	</style>
+</head>
+
+<body>
+    <div class="head1">
+        Resume
+    </div>
+
+<input type="button" onclick="hiiii()" value="select" id="hiiii" hidden>
+<a style="text-decoration:none;font-size: 35px;" href="final upload copy.html"><span>&#43;</span></a>
+<p id="demo"></p>
+<script src="https://www.gstatic.com/firebasejs/8.3.3/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.3.3/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.3.3/firebase-database.js"></script> 
+<script src="https://www.gstatic.com/firebasejs/8.3.3/firebase-storage.js"></script> 
+
+<script id="MainScript">
+    var ImgName,ImgUrl,t,pn,x,u,r,y;
+    var files=[];
+    var a=[],b=[];
+    var reader;
+    var wu;
+
+   var firebaseConfig = {
+   apiKey: "AIzaSyC4y03stQAJK_UuOPHliroLe6AGVNYaPOE",
+    authDomain: "resume-uploader-dae65.firebaseapp.com",
+    databaseURL: "https://resume-uploader-dae65-default-rtdb.firebaseio.com",
+    projectId: "resume-uploader-dae65",
+    storageBucket: "resume-uploader-dae65.appspot.com",
+    messagingSenderId: "176354575684",
+    appId: "1:176354575684:web:b38d23fe6c6b8788a90311",
+    measurementId: "G-BNVBRNRSZW"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  firebase.analytics();
+</script>
+<script>
+	
+var j=0,i,op,opp,k=1;
+var text;
+var wu;
+timeoutI = setInterval(hiiii,200);
+function hiiii(){
+    
+ firebase.database().ref('Pictures/'+"nikhil"+'/com').on('value',(snap)=>{
+    j=snap.val();
+  });
+
+ if(j!=0){
+clearInterval(timeoutI);
+lp();
+
+ }   
+ 
+}
+
+
+ function lp(){  
+
+timeoutID = setInterval(hiii,500);
+}
+
+ function hiii(){
+
+op=j;
+po=k;
+if(op!=0){
+
+firebase.database().ref('Pictures/'+op+'/Dept').on('value',function(snapshot){
+document.getElementById(po+"x").innerHTML=snapshot.val();
+});
+firebase.database().ref('Pictures/'+op+'/Name').on('value',function(snapshot){
+document.getElementById(po+"y").innerHTML=snapshot.val();
+});
+firebase.database().ref('Pictures/'+op+'/Rollno').on('value',function(snapshot){
+document.getElementById(po+"r").innerHTML=snapshot.val();
+});
+firebase.database().ref('Pictures/'+op+'/Link').on('value',function(snapshot){
+document.getElementById(po+"u").href=snapshot.val();
+
+});
+
+ 
+
+    firebase.database().ref('Pictures/'+op).on('value',function(snapshot){
+         document.getElementById(op).src=snapshot.val().Link;
+         text=snapshot.val().Dept;
+         });
+
+firebase.database().ref('Pictures/'+op).on('value',function(snapshot){
+         document.getElementById(op+"z").src=snapshot.val().Link;
+        
+         });
+  
+           var objNewDiv = document.createElement('div');
+  
+    objNewDiv.innerHTML = '<label id="'+k+"y"+'" style="color:#0e0e3f;font-size:30px;font-family: Georgia;"></label>&nbsp;&nbsp;<label id="'+k+"x"+'" style="color:#0e0e3f;font-size:15px;font-family: Georgia;"></label><br><label id="'+k+"r"+'" style="color:#0e0e3f;font-size:15px;font-family:Courier New;"></label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a id="'+po+"u"+'" href="'+wu+'"><i class="fa fa-address-book" style="font-size:25px;color:black;"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a style="text:text-decoration:none;" href="delete copy.html"><i class="material-icons" style="font-size:25px;color:red;">mode_edit</i></a><br><br>';
+
+    document.getElementById('demo').appendChild(objNewDiv);
+
+    
+if(op==1){
+     clearInterval(timeoutID);
+}
+
+
+j=j-1;
+k=k+1;
+
+
+
+}
+}
+
+
+
+
+
+</script>
+
+
+
+
+
+
+</body>
+
+</html>
